@@ -15,4 +15,7 @@ public class Constants {
 	//Number of digits of IATACode in Flight Numbers
 	public static final int IATA_DIGITS = 2;
 	
+	//The format to receive dates
+	public static final String DATE_FORMAT = "dd/MM/yyyy";
+	
 }

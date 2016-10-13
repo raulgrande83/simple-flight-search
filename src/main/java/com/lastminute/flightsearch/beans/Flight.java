@@ -10,6 +10,7 @@ public class Flight {
 	private int infantPassengers;
 	private int childPassengers;
 	private int daysToDeparture;
+	private double basePrice;
 	private double totalPrice;
 	
 	public Airline getAirline() {
@@ -66,8 +67,11 @@ public class Flight {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
+	public double getBasePrice() {
+		return basePrice;
+	}
+	public void setBasePrice(double basePrice) {
+		this.basePrice = basePrice;
+	}
 	
-	
-	
-
 }

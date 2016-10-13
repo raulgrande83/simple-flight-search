@@ -132,6 +132,10 @@ public class DataFileReader {
 					flight.setFlightNumber(data.trim());
 				}
 				
+				//Fourth column is base price
+				else if (index == 3 && data!=null)
+					flight.setBasePrice(Double.valueOf(data.trim()));
+				
 				index++;
 			}
 			//Reset index
