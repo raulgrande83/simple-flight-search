@@ -10,13 +10,22 @@ import java.util.Scanner;
 import com.lastminute.flightsearch.beans.Airline;
 import com.lastminute.flightsearch.beans.Airport;
 import com.lastminute.flightsearch.beans.Flight;
-import com.lastminute.flightsearch.beans.Money;
+import com.lastminute.flightsearch.beans.Price;
 import com.lastminute.flightsearch.constants.Constants;
 import com.lastminute.flightsearch.utils.FlightSearchUtils;
 
+/**
+ * This class reads and extracts data to fill the airports, airlines and flights 
+ * @author raulgrande83
+ *
+ */
 public class DataFileReader {
 	
-	
+	/**
+	 * Method that reads the file where the airport info is stored
+	 * @return List<Airport> The list of airports retrieved from file
+	 * @throws FileNotFoundException It is thrown if the file does not exist
+	 */
 	public static List<Airport> getAirportData() throws FileNotFoundException{
 		
 		//The airports list to be returned
@@ -56,6 +65,11 @@ public class DataFileReader {
         return airportsList;
 	}
 	
+	/**
+	 * Method that reads the file where the airlines info is stored
+	 * @return List<Airline> The list of airlines retrieved from file
+	 * @throws FileNotFoundException It is thrown if the file does not exist
+	 */
 	public static List<Airline> getAirlinesData() throws FileNotFoundException{
 		
 		//Read the file where the airports data is stored 
@@ -83,7 +97,7 @@ public class DataFileReader {
 					airline.setName(data.trim());
 				//Third column is Infant Price
 				else if (index == 2 && data!=null)
-					airline.setInfantPrice(new Money(BigDecimal.valueOf(Double.valueOf(data.trim()))));
+					airline.setInfantPrice(new Price(BigDecimal.valueOf(Double.valueOf(data.trim()))));
 				
 				index++;
 			}
@@ -98,7 +112,11 @@ public class DataFileReader {
         return airlinesList;
 	}
 	
-	
+	/**
+	 * Method that reads the file where the flights info is stored
+	 * @return List<Flight> The list of flights retrieved from file
+	 * @throws FileNotFoundException It is thrown if the file does not exist
+	 */
 	public static List<Flight> getFlightsData() throws FileNotFoundException{
 		
 		//Read the file where the flights data is stored 
@@ -136,7 +154,7 @@ public class DataFileReader {
 				
 				//Fourth column is base price
 				else if (index == 3 && data!=null)
-					flight.setBasePrice(new Money(BigDecimal.valueOf(Double.valueOf(data.trim()))));
+					flight.setBasePrice(new Price(BigDecimal.valueOf(Double.valueOf(data.trim()))));
 				
 				index++;
 			}

@@ -7,7 +7,7 @@ import java.util.List;
 import com.lastminute.flightsearch.beans.Airline;
 import com.lastminute.flightsearch.beans.Airport;
 import com.lastminute.flightsearch.beans.Flight;
-import com.lastminute.flightsearch.beans.Money;
+import com.lastminute.flightsearch.beans.Price;
 import com.lastminute.flightsearch.data.FlightsData;
 import com.lastminute.flightsearch.utils.FlightSearchUtils;
 
@@ -66,7 +66,7 @@ public class MockData {
 			objFlight.setDestination(FlightSearchUtils.getAirportByIATA(DESTINATIONS[i]));
 			objFlight.setAirline(FlightSearchUtils.getAirlineFromFlightNumber(FLIGHT_NUMBERS[i]));
 			objFlight.setFlightNumber(FLIGHT_NUMBERS[i]);
-			objFlight.setBasePrice(new Money(BigDecimal.valueOf(PRICES[i])));
+			objFlight.setBasePrice(new Price(BigDecimal.valueOf(PRICES[i])));
 			
 			flightsList.add(objFlight);
 		}

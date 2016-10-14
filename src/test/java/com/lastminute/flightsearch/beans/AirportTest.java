@@ -15,19 +15,19 @@ public class AirportTest {
 	private static Airport airport;
 	private static Airport airportNull;
 	
-	@Before
 	/**
 	 * Method that builds different test data
 	 */
+	@Before
 	public void buildAirports(){
 		airport = new Airport(IATA_CODE, CITY);
 		airportNull = new Airport(null, null);
 	}
 	
-	@After
 	/**
 	 * Method that cleans the created test data
 	 */
+	@After
 	public void cleanAirports(){
 		airport = null;
 		airportNull = null;

@@ -1,17 +1,35 @@
 package com.lastminute.flightsearch.beans;
 
+/**
+ * This class represents a flight.
+ * @author raulgrande83
+ *
+ */
 public class Flight {
-	
+
+	//The airline that operates this flight
 	private Airline airline;
+	//The flight number
 	private String flightNumber;
+	//The airport of origin
 	private Airport origin;
+	//The airport of destination
 	private Airport destination;
+	//The number of adult passengers
 	private int adultPassengers;
+	//The number of infant passengers
 	private int infantPassengers;
+	//The number of child passengers
 	private int childPassengers;
-	private int daysToDeparture;
-	private Money basePrice;
-	private Money totalPrice;
+	//The number of days to departure date
+	private long daysToDeparture;
+	//The base price of the flight
+	private Price basePrice;
+	//The total price calculated
+	private Price totalPrice;
+	
+	
+	//GETTERS AND SETTERS
 	
 	public Airline getAirline() {
 		return airline;
@@ -55,22 +73,22 @@ public class Flight {
 	public void setChildPassengers(int childPassengers) {
 		this.childPassengers = childPassengers;
 	}
-	public int getDaysToDeparture() {
+	public long getDaysToDeparture() {
 		return daysToDeparture;
 	}
-	public void setDaysToDeparture(int daysToDeparture) {
+	public void setDaysToDeparture(long daysToDeparture) {
 		this.daysToDeparture = daysToDeparture;
 	}
-	public Money getBasePrice() {
+	public Price getBasePrice() {
 		return basePrice;
 	}
-	public void setBasePrice(Money basePrice) {
+	public void setBasePrice(Price basePrice) {
 		this.basePrice = basePrice;
 	}
-	public Money getTotalPrice() {
+	public Price getTotalPrice() {
 		return totalPrice;
 	}
-	public void setTotalPrice(Money totalPrice) {
+	public void setTotalPrice(Price totalPrice) {
 		this.totalPrice = totalPrice;
 	}
 	

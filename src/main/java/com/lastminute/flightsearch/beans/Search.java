@@ -2,16 +2,30 @@ package com.lastminute.flightsearch.beans;
 
 import java.util.Date;
 
+/**
+ * This class is used to store all the search parameters
+ * @author raulgrande83
+ *
+ */
 public class Search {
 
+	//Origin parameter
 	private String origin;
+	//Destination parameter
 	private String destination;
+	//Date calculated using dateString
 	private Date flightDate;
+	//Date parameter
 	private String dateString;
+	//Number of adults
 	private int adults;
+	//Number of infants
 	private int infants;
+	//Number of children
 	private int children;
 	
+	
+	//GETTERS AND SETTERS
 	
 	public String getOrigin() {
 		return origin;

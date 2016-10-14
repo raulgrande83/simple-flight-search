@@ -23,22 +23,21 @@ public class Airport {
 		this.city = cityParam;
 	}
 	
-	/**
-	 * Returns the IATA Code
-	 * @return
-	 */
+	
+	//GETTERS AND SETTERS
+	
 	public String getIATACode() {
 		return IATACode;
 	}
-	//Sets the IATACode
+	
 	public void setIATACode(String iATACode) {
 		IATACode = iATACode;
 	}
-	//Returns the name of the city
+	
 	public String getCity() {
 		return city;
 	}
-	//Sets the name of the city
+	
 	public void setCity(String city) {
 		this.city = city;
 	}

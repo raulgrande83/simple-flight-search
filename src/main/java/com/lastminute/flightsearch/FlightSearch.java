@@ -7,7 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.lastminute.flightsearch.beans.Flight;
-import com.lastminute.flightsearch.beans.Money;
+import com.lastminute.flightsearch.beans.Price;
 import com.lastminute.flightsearch.beans.Search;
 import com.lastminute.flightsearch.constants.Constants;
 import com.lastminute.flightsearch.exceptions.SearchParamsException;
@@ -15,36 +15,52 @@ import com.lastminute.flightsearch.pricerules.DaysPriceRules;
 import com.lastminute.flightsearch.pricerules.PassengerPriceRules;
 import com.lastminute.flightsearch.utils.FlightSearchUtils;
 
+/**
+ * This class implements the logic to receive search parameters, validate them and 
+ * do the logic to search and calculate prices for each resulting flight.
+ * @author raulgrande83
+ *
+ */
 public class FlightSearch {
 
+	//Contains the search parameters
 	private static Search search;
+	//Contains the resulting flights
 	private static List<Flight> resultFlights = null;
 	
-	public static List<Flight> doFlightSearch(String originParam, String destinationParam, String dateParam, int adultsParam, int infantsParam, int childrenParam){
+	/**
+	 * Method that receives the parameters and search for flights
+	 * 
+	 * @param originParam The IATA code of the airport of origin
+	 * @param destinationParam The IATA code of the airport of destination
+	 * @param dateParam The date when the user wants to fly
+	 * @param adultsParam How many adult passengers
+	 * @param infantsParam How many infant passengers
+	 * @param childrenParam How many child passengers
+	 * @return List<Flight> The list with all the information for the resulting flights
+	 * @throws SearchParamsException Is thrown when one or more parameters are not valid
+	 */
+	public static List<Flight> doFlightSearch(String originParam, String destinationParam, String dateParam, int adultsParam, int infantsParam, int childrenParam) throws SearchParamsException{
 		
-		try {
-			//Get the params and validate them
-			getAllParams(originParam, destinationParam, dateParam, adultsParam, infantsParam, childrenParam);
-			
-			//Get the flights that have the origin and destination
-			resultFlights = FlightSearchUtils.getFlightsOriginDestination(search.getOrigin(), search.getDestination());
-			
-			//Calculate and set the prices for each flight
-			calculateFlightPrices();
-			
-			//Print results
-			printSearchAndResults();
-			
-		} catch (SearchParamsException e) {
-			System.err.println("There has been errors parsing the search parameters.");
-			e.printStackTrace();
-		}
+		//Get the params and validate them
+		getAllParams(originParam, destinationParam, dateParam, adultsParam, infantsParam, childrenParam);
+		
+		//Get the flights that have the origin and destination
+		resultFlights = FlightSearchUtils.getFlightsOriginDestination(search.getOrigin(), search.getDestination());
+		
+		//Calculate and set the prices for each flight
+		calculateFlightPrices();
+		
+		//Print results
+		//printSearchAndResults();
 		
 		//Return the flights with all the calculated data
 		return resultFlights;
 	}
 	
-	
+	/**
+	 * Print the search and the results
+	 */
 	private static void printSearchAndResults(){
 		System.out.println(" - Search - ");
 		System.out.println("\t Passengers: "+search.getAdults()+" adults, "+search.getChildren()+" children, "+search.getInfants()+" infants.");
@@ -61,9 +77,20 @@ public class FlightSearch {
 				System.out.println("\t* "+printFlight.getFlightNumber()+", "+printFlight.getTotalPrice());
 			}
 		}
+		System.out.println();
 	}
 	
-	
+	/**
+	 * Method that set the parameters into the Search object
+	 * 
+	 * @param originParam The IATA code of the airport of origin
+	 * @param destinationParam The IATA code of the airport of destination
+	 * @param dateParam The date when the user wants to fly
+	 * @param adultsParam How many adult passengers
+	 * @param infantsParam How many infant passengers
+	 * @param childrenParam How many child passengers
+	 * @throws SearchParamsException Is thrown when one or more parameters are not valid
+	 */
 	private static void getAllParams(String originParam, String destinationParam, String dateParam, int adultsParam, int infantsParam, int childrenParam) throws SearchParamsException{
 		
 		//Set the params into the FlightSearch
@@ -79,9 +106,12 @@ public class FlightSearch {
 		validateSearchParameters();
 	}
 	
-	
+	/**
+	 * Validates all search parameters
+	 * @throws SearchParamsException Is thrown when one or more parameters are not valid
+	 */
 	private static void validateSearchParameters() throws SearchParamsException{
-		
+		//Stores the errors during validations
 		List<String> paramsErrors = new ArrayList<String>();
 		
 		//Validate that number of adults passengers is >= 0
@@ -113,9 +143,14 @@ public class FlightSearch {
 		} catch (ParseException e) {
 			paramsErrors.add("The format of the date is not valid. Use "+Constants.DATE_FORMAT);
 		}
-		
-		
-		
+		//Validate the origin is not null or empty
+		if(search.getOrigin()==null || search.getOrigin().isEmpty()){
+			paramsErrors.add("The origin must be informed.");
+		}
+		//Validate the destination is not null or empty
+		if(search.getDestination()==null || search.getDestination().isEmpty()){
+			paramsErrors.add("The destination must be informed.");
+		}
 		
 		//If there are any error throw the SearchParamsException
 		if(!paramsErrors.isEmpty()){
@@ -135,6 +170,9 @@ public class FlightSearch {
 			
 	}
 	
+	/**
+	 * This method calculates the flight price, depending on the flight date and number of passengers
+	 */
 	private static void calculateFlightPrices(){
 		
 		if(!resultFlights.isEmpty()){
@@ -142,6 +180,10 @@ public class FlightSearch {
 			final DaysPriceRules priceRule = FlightSearchUtils.getPriceRule(search.getFlightDate());
 			
 			for(Flight flight:resultFlights){
+				
+				//Set days prior to departure date on flight
+				flight.setDaysToDeparture(FlightSearchUtils.calculateDepartureDays(search.getFlightDate()));
+				
 				BigDecimal totalPrice = new BigDecimal(0.0);
 				
 				//Calculate Adults price
@@ -152,11 +194,19 @@ public class FlightSearch {
 				totalPrice = totalPrice.add(calculatePassengerPrice(flight, search.getInfants(), PassengerPriceRules.INFANT, priceRule));
 				
 				//Set the total price on the flight
-				flight.setTotalPrice(new Money(totalPrice));
+				flight.setTotalPrice(new Price(totalPrice));
 			}
 		}
 	}
 	
+	/**
+	 * This method calculate the price depending on the type and number of passengers.
+	 * @param flight The flight is being calculated
+	 * @param passengersNumber Number of passengers of this type
+	 * @param passengerRule The rule that applies to that type
+	 * @param priceRule The rule that applies to the date of the flight
+	 * @return BigDecimal The price calculated with all the parameters
+	 */
 	private static BigDecimal calculatePassengerPrice(Flight flight, int passengersNumber, PassengerPriceRules passengerRule, DaysPriceRules priceRule){
 		
 		BigDecimal passengersPrice = new BigDecimal(0.0);

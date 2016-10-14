@@ -1,5 +1,11 @@
 package com.lastminute.flightsearch.pricerules;
 
+/**
+ * This enumeration stores the different price rules 
+ * depending on the type of passenger (Adult / Child / Infant).
+ * @author raulgrande83
+ *
+ */
 public enum PassengerPriceRules {
 	
 	//full price (i.e. price resulting from the *days to departure date* rule)
@@ -9,13 +15,20 @@ public enum PassengerPriceRules {
 	//fixed price depending on the airline. Rule *days to departure date* is not applied for infants
 	INFANT(0, true);
 	
+	//The discount to be applied
+	private double discount;
+	//Checks if there is a fixed price for this type of passenger
+	private boolean fixedPrice;
+	
+	/**
+	 * Constructor for the passenger price rule
+	 * @param disc The discount to be applied
+	 * @param fixed Boolean that sets if there is a fixed price for this type of passenger
+	 */
 	private PassengerPriceRules(double disc, boolean fixed){
 		discount = disc;
 		fixedPrice = fixed;
 	}
-	
-	private double discount;
-	private boolean fixedPrice;
 	
 	public double getDiscount() {
 		return discount;
