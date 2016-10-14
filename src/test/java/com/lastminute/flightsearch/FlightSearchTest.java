@@ -47,11 +47,11 @@ public class FlightSearchTest {
 		
 		assertEquals("There should be 3 flights available", 3, results.size());
 		assertEquals("First flight should be TK2372", "TK2372", results.get(0).getFlightNumber());
-		assertEquals("First flight price should be 157.60 €", "157.60 €", results.get(0).getTotalPrice().toString());
+		assertEquals("First flight price should be 157.60", "157.60", results.get(0).getTotalPrice().getAmount().toString());
 		assertEquals("Second flight should be TK2659", "TK2659", results.get(1).getFlightNumber());
-		assertEquals("Second flight price should be 198.40 €", "198.40 €", results.get(1).getTotalPrice().toString());
+		assertEquals("Second flight price should be 198.40", "198.40", results.get(1).getTotalPrice().getAmount().toString());
 		assertEquals("Third flight should be LH5909", "LH5909", results.get(2).getFlightNumber());
-		assertEquals("Third flight price should be 90.40 €", "90.40 €", results.get(2).getTotalPrice().toString());
+		assertEquals("Third flight price should be 90.40", "90.40", results.get(2).getTotalPrice().getAmount().toString());
 	}
 	
 	@Test
@@ -67,9 +67,9 @@ public class FlightSearchTest {
 		
 		assertEquals("There should be 2 flights available", 2, results.size());
 		assertEquals("First flight should be TK8891", "TK8891", results.get(0).getFlightNumber());
-		assertEquals("First flight price should be 806.00 €", "806.00 €", results.get(0).getTotalPrice().toString());
+		assertEquals("First flight price should be 806.00", "806.00", results.get(0).getTotalPrice().getAmount().toString());
 		assertEquals("Second flight should be LH1085", "LH1085", results.get(1).getFlightNumber());
-		assertEquals("Second flight price should be 481.19 €", "481.19 €", results.get(1).getTotalPrice().toString());
+		assertEquals("Second flight price should be 481.19", "481.19", results.get(1).getTotalPrice().getAmount().toString());
 	}
 	
 	@Test
@@ -85,9 +85,9 @@ public class FlightSearchTest {
 		
 		assertEquals("There should be 2 flights available", 2, results.size());
 		assertEquals("First flight should be IB2171", "IB2171", results.get(0).getFlightNumber());
-		assertEquals("First flight price should be 909.09 €", "909.09 €", results.get(0).getTotalPrice().toString());
+		assertEquals("First flight price should be 909.09", "909.09", results.get(0).getTotalPrice().getAmount().toString());
 		assertEquals("Second flight should be LH5496", "LH5496", results.get(1).getFlightNumber());
-		assertEquals("Second flight price should be 1028.43 €", "1028.43 €", results.get(1).getTotalPrice().toString());
+		assertEquals("Second flight price should be 1028.43", "1028.43", results.get(1).getTotalPrice().getAmount().toString());
 	}
 	
 	@Test
