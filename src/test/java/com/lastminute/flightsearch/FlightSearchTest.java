@@ -47,7 +47,7 @@ public class FlightSearchTest {
 		
 		assertEquals("There should be 3 flights available", 3, results.size());
 		assertEquals("First flight should be TK2372", "TK2372", results.get(0).getFlightNumber());
-		assertEquals("First flight price should be 157.60", "157.60", results.get(0).getTotalPrice().getAmount().toString());
+		assertEquals("First flight price should be 157.60 €", "157.60 €", results.get(0).getTotalPrice().toString());
 		assertEquals("Second flight should be TK2659", "TK2659", results.get(1).getFlightNumber());
 		assertEquals("Second flight price should be 198.40", "198.40", results.get(1).getTotalPrice().getAmount().toString());
 		assertEquals("Third flight should be LH5909", "LH5909", results.get(2).getFlightNumber());
