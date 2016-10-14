@@ -1,6 +1,7 @@
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\utils\FlightSearchUtils.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\pricerules\PassengerPriceRules.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\beans\Flight.java
+C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\beans\Price.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\beans\Airport.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\beans\Airline.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\FlightSearch.java
@@ -8,6 +9,5 @@ C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\data\FlightsD
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\exceptions\SearchParamsException.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\data\DataFileReader.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\pricerules\DaysPriceRules.java
-C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\beans\Money.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\constants\Constants.java
 C:\Projects\FlightSearch\src\main\java\com\lastminute\flightsearch\beans\Search.java
