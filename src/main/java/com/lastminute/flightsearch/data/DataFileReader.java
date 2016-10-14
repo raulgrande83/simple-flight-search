@@ -2,6 +2,7 @@ package com.lastminute.flightsearch.data;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -9,6 +10,7 @@ import java.util.Scanner;
 import com.lastminute.flightsearch.beans.Airline;
 import com.lastminute.flightsearch.beans.Airport;
 import com.lastminute.flightsearch.beans.Flight;
+import com.lastminute.flightsearch.beans.Money;
 import com.lastminute.flightsearch.constants.Constants;
 import com.lastminute.flightsearch.utils.FlightSearchUtils;
 
@@ -81,7 +83,7 @@ public class DataFileReader {
 					airline.setName(data.trim());
 				//Third column is Infant Price
 				else if (index == 2 && data!=null)
-					airline.setInfantPrice(Double.valueOf(data.trim()));
+					airline.setInfantPrice(new Money(BigDecimal.valueOf(Double.valueOf(data.trim()))));
 				
 				index++;
 			}
@@ -134,7 +136,7 @@ public class DataFileReader {
 				
 				//Fourth column is base price
 				else if (index == 3 && data!=null)
-					flight.setBasePrice(Double.valueOf(data.trim()));
+					flight.setBasePrice(new Money(BigDecimal.valueOf(Double.valueOf(data.trim()))));
 				
 				index++;
 			}

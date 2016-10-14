@@ -1,15 +1,18 @@
 package com.lastminute.flightsearch;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import com.lastminute.flightsearch.beans.Flight;
+import com.lastminute.flightsearch.beans.Money;
 import com.lastminute.flightsearch.beans.Search;
 import com.lastminute.flightsearch.constants.Constants;
 import com.lastminute.flightsearch.exceptions.SearchParamsException;
 import com.lastminute.flightsearch.pricerules.DaysPriceRules;
+import com.lastminute.flightsearch.pricerules.PassengerPriceRules;
 import com.lastminute.flightsearch.utils.FlightSearchUtils;
 
 public class FlightSearch {
@@ -26,18 +29,38 @@ public class FlightSearch {
 			//Get the flights that have the origin and destination
 			resultFlights = FlightSearchUtils.getFlightsOriginDestination(search.getOrigin(), search.getDestination());
 			
-			//Calculate the prices for each flight
+			//Calculate and set the prices for each flight
 			calculateFlightPrices();
 			
-			
+			//Print results
+			printSearchAndResults();
 			
 		} catch (SearchParamsException e) {
 			System.err.println("There has been errors parsing the search parameters.");
 			e.printStackTrace();
 		}
 		
-		
+		//Return the flights with all the calculated data
 		return resultFlights;
+	}
+	
+	
+	private static void printSearchAndResults(){
+		System.out.println(" - Search - ");
+		System.out.println("\t Passengers: "+search.getAdults()+" adults, "+search.getChildren()+" children, "+search.getInfants()+" infants.");
+		System.out.println("\t Dates: "+search.getDateString()+", "+FlightSearchUtils.calculateDepartureDays(search.getFlightDate())+" days prior to departure date");
+		System.out.println("\t Flying: "+search.getOrigin()+" -> "+search.getDestination());
+		System.out.println();
+		
+		System.out.println(" -- Results -- ");
+		
+		if(resultFlights.isEmpty()){
+			System.out.println("\t* No flights available with those parameters.");
+		}else{
+			for(Flight printFlight:resultFlights){
+				System.out.println("\t* "+printFlight.getFlightNumber()+", "+printFlight.getTotalPrice());
+			}
+		}
 	}
 	
 	
@@ -119,12 +142,44 @@ public class FlightSearch {
 			final DaysPriceRules priceRule = FlightSearchUtils.getPriceRule(search.getFlightDate());
 			
 			for(Flight flight:resultFlights){
-				double totalPrice = 0.0;
-				//Calculate Adults price
-				totalPrice = search.getAdults() * (flight.getBasePrice() * priceRule.getPercentage());
+				BigDecimal totalPrice = new BigDecimal(0.0);
 				
-				flight.setTotalPrice(totalPrice);				
+				//Calculate Adults price
+				totalPrice = totalPrice.add(calculatePassengerPrice(flight, search.getAdults(), PassengerPriceRules.ADULT, priceRule));
+				//Calculate Children price
+				totalPrice = totalPrice.add(calculatePassengerPrice(flight, search.getChildren(), PassengerPriceRules.CHILD, priceRule));
+				//Calculate Infants price
+				totalPrice = totalPrice.add(calculatePassengerPrice(flight, search.getInfants(), PassengerPriceRules.INFANT, priceRule));
+				
+				//Set the total price on the flight
+				flight.setTotalPrice(new Money(totalPrice));
 			}
 		}
+	}
+	
+	private static BigDecimal calculatePassengerPrice(Flight flight, int passengersNumber, PassengerPriceRules passengerRule, DaysPriceRules priceRule){
+		
+		BigDecimal passengersPrice = new BigDecimal(0.0);
+		
+		//Only make calcs if there are any passengers
+		if(passengersNumber > 0){
+		
+			//Check if there is a fixed price for that passenger price rule
+			if(!passengerRule.isFixedPrice()){
+				passengersPrice = new BigDecimal(priceRule.getPercentage()).multiply(flight.getBasePrice().getAmount());
+				
+			}else if(passengerRule.equals(PassengerPriceRules.INFANT)){
+				//Fixed price only for infant passengers
+				passengersPrice = flight.getAirline().getInfantPrice().getAmount();
+			}
+			
+			//If there's a disccount, it applies over the price
+			if(passengerRule.getDiscount() > 0){
+				passengersPrice = new BigDecimal(passengerRule.getDiscount()).multiply(passengersPrice);
+			}
+		}	
+		//Return the passenger's price for all passengers of this type
+		passengersPrice = passengersPrice.multiply(new BigDecimal(passengersNumber));
+		return passengersPrice;
 	}
 }

@@ -16,15 +16,6 @@ public class FlightsData {
 
 	public static List<Airport> getAirportsList() {
 		if(airportsList.isEmpty()){
-//			airportsList.add(new Airport("MAD", "Madrid"));
-//			airportsList.add(new Airport("BCN", "Barcelona"));
-//			airportsList.add(new Airport("LHR", "London"));
-//			airportsList.add(new Airport("CDG", "Paris"));
-//			airportsList.add(new Airport("FRA", "Frakfurt"));
-//			airportsList.add(new Airport("IST", "Istanbul"));
-//			airportsList.add(new Airport("AMS", "Amsterdam"));
-//			airportsList.add(new Airport("FCO", "Rome"));
-//			airportsList.add(new Airport("CPH", "Copenhagen"));
 			
 			try {
 				airportsList = DataFileReader.getAirportData();
@@ -56,6 +47,18 @@ public class FlightsData {
 			}
 		}
 		return flightsList;
+	}
+
+	public static void setAirportsList(List<Airport> airportsList) {
+		FlightsData.airportsList = airportsList;
+	}
+
+	public static void setAirlinesList(List<Airline> airlinesList) {
+		FlightsData.airlinesList = airlinesList;
+	}
+
+	public static void setFlightsList(List<Flight> flightsList) {
+		FlightsData.flightsList = flightsList;
 	}
 	
 	

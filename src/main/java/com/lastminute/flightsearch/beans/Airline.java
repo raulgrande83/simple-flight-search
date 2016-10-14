@@ -1,5 +1,7 @@
 package com.lastminute.flightsearch.beans;
 
+import java.math.BigDecimal;
+
 public class Airline {
 
 	//Stores the IATA code
@@ -7,12 +9,12 @@ public class Airline {
 	//Stores the name of the airline
 	private String name;
 	//Stores the price of 
-	private double infantPrice;
+	private Money infantPrice;
 	
-	public Airline(String IATACodeParam, String nameParam, double infantPriceParam) {
+	public Airline(String IATACodeParam, String nameParam, BigDecimal infantPriceParam) {
 		this.IATACode = IATACodeParam;
 		this.name = nameParam;
-		this.infantPrice = infantPriceParam;
+		this.infantPrice = new Money(infantPriceParam);
 	}
 	
 	public Airline(){}
@@ -33,11 +35,11 @@ public class Airline {
 		this.name = name;
 	}
 
-	public double getInfantPrice() {
+	public Money getInfantPrice() {
 		return infantPrice;
 	}
 
-	public void setInfantPrice(double infantPrice) {
+	public void setInfantPrice(Money infantPrice) {
 		this.infantPrice = infantPrice;
 	}
 

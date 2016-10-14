@@ -1,5 +1,7 @@
 package com.lastminute.flightsearch.constants;
 
+import java.util.Currency;
+
 public class Constants {
 
 	//Where the data files are stored
@@ -17,5 +19,8 @@ public class Constants {
 	
 	//The format to receive dates
 	public static final String DATE_FORMAT = "dd/MM/yyyy";
+	
+	//Number format for representing Euro
+	Currency curr = Currency.getInstance("EUR");
 	
 }

@@ -50,19 +50,9 @@ public class AirportTest {
 		
 	}
 
-//	@Test
-//	public void testSetIATACode() {
-//		fail("Not yet implemented");
-//	}
-
 	@Test
 	public void testGetCityDummy() {
 		assertEquals("The City name should be "+CITY, CITY, airport.getCity());
 	}
-
-//	@Test
-//	public void testSetCity() {
-//		fail("Not yet implemented");
-//	}
 
 }

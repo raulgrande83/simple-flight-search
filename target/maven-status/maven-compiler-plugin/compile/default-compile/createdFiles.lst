@@ -4,8 +4,10 @@ com\lastminute\flightsearch\beans\Flight.class
 com\lastminute\flightsearch\data\FlightsData.class
 com\lastminute\flightsearch\FlightSearch.class
 com\lastminute\flightsearch\beans\Airline.class
+com\lastminute\flightsearch\beans\Money.class
 com\lastminute\flightsearch\data\DataFileReader.class
 com\lastminute\flightsearch\constants\Constants.class
 com\lastminute\flightsearch\utils\FlightSearchUtils.class
+com\lastminute\flightsearch\pricerules\DaysPriceRules.class
 com\lastminute\flightsearch\beans\Search.class
-Execute.class
+com\lastminute\flightsearch\pricerules\PassengerPriceRules.class
