@@ -1,5 +1,8 @@
 package com.lastminute.flightsearch.constants;
 
+import java.math.RoundingMode;
+import java.util.Currency;
+
 /**
  * Class that contains the constants used
  * @author raulgrande83
@@ -23,4 +26,8 @@ public class Constants {
 	//The format to receive dates
 	public static final String DATE_FORMAT = "dd/MM/yyyy";
 	
+	//By default the currency used is EURO
+    public static final Currency EURO = Currency.getInstance("EUR");
+    //The rounding mode
+    public static final RoundingMode DEFAULT_ROUNDING = RoundingMode.HALF_EVEN;
 }

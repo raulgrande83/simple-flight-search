@@ -3,7 +3,7 @@ package com.lastminute.flightsearch;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
 
 import com.lastminute.flightsearch.beans.Flight;
@@ -51,33 +51,8 @@ public class FlightSearch {
 		//Calculate and set the prices for each flight
 		calculateFlightPrices();
 		
-		//Print results
-		//printSearchAndResults();
-		
 		//Return the flights with all the calculated data
 		return resultFlights;
-	}
-	
-	/**
-	 * Print the search and the results
-	 */
-	private static void printSearchAndResults(){
-		System.out.println(" - Search - ");
-		System.out.println("\t Passengers: "+search.getAdults()+" adults, "+search.getChildren()+" children, "+search.getInfants()+" infants.");
-		System.out.println("\t Dates: "+search.getDateString()+", "+FlightSearchUtils.calculateDepartureDays(search.getFlightDate())+" days prior to departure date");
-		System.out.println("\t Flying: "+search.getOrigin()+" -> "+search.getDestination());
-		System.out.println();
-		
-		System.out.println(" -- Results -- ");
-		
-		if(resultFlights.isEmpty()){
-			System.out.println("\t* No flights available with those parameters.");
-		}else{
-			for(Flight printFlight:resultFlights){
-				System.out.println("\t* "+printFlight.getFlightNumber()+", "+printFlight.getTotalPrice());
-			}
-		}
-		System.out.println();
 	}
 	
 	/**
@@ -135,7 +110,7 @@ public class FlightSearch {
 			search.setFlightDate(FlightSearchUtils.getFlightDate(search.getDateString()));
 			
 			//Validate that the departure date should be greater than today
-			Date today = new Date();
+			Calendar today = Calendar.getInstance();
 			if(today.after(search.getFlightDate())){
 				paramsErrors.add("The departure date must be greater than today.");
 			}

@@ -35,7 +35,7 @@ public class MockData {
 		airportsList.add(new Airport("BCN", "Barcelona"));
 		airportsList.add(new Airport("LHR", "London"));
 		airportsList.add(new Airport("CDG", "Paris"));
-		airportsList.add(new Airport("FRA", "Frakfurt"));
+		airportsList.add(new Airport("FRA", "Frankfurt"));
 		airportsList.add(new Airport("IST", "Istanbul"));
 		airportsList.add(new Airport("AMS", "Amsterdam"));
 		airportsList.add(new Airport("FCO", "Rome"));

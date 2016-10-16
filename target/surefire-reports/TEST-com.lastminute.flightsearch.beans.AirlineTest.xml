@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="2" failures="0" name="com.lastminute.flightsearch.pricerules.PassengerPriceRulesTest" time="0.002" errors="0" skipped="0">
+<testsuite tests="8" failures="0" name="com.lastminute.flightsearch.beans.AirlineTest" time="0.012" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_101\jre\bin"/>
@@ -61,6 +61,12 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase classname="com.lastminute.flightsearch.pricerules.PassengerPriceRulesTest" name="testRulesNotNull" time="0.002"/>
-  <testcase classname="com.lastminute.flightsearch.pricerules.PassengerPriceRulesTest" name="testRulesDiscount" time="0"/>
+  <testcase classname="com.lastminute.flightsearch.beans.AirlineTest" name="testGetNameDummy" time="0.01"/>
+  <testcase classname="com.lastminute.flightsearch.beans.AirlineTest" name="testAirlineConstructor" time="0"/>
+  <testcase classname="com.lastminute.flightsearch.beans.AirlineTest" name="testGetPriceNull" time="0"/>
+  <testcase classname="com.lastminute.flightsearch.beans.AirlineTest" name="testGetNameNull" time="0.001"/>
+  <testcase classname="com.lastminute.flightsearch.beans.AirlineTest" name="testGetIATACodeNull" time="0.001"/>
+  <testcase classname="com.lastminute.flightsearch.beans.AirlineTest" name="testAirlineConstructorEmpty" time="0"/>
+  <testcase classname="com.lastminute.flightsearch.beans.AirlineTest" name="testGetPriceDummy" time="0"/>
+  <testcase classname="com.lastminute.flightsearch.beans.AirlineTest" name="testGetIATACodeDummy" time="0"/>
 </testsuite>

@@ -1,6 +1,6 @@
 package com.lastminute.flightsearch.beans;
 
-import java.util.Date;
+import java.util.Calendar;
 
 /**
  * This class is used to store all the search parameters
@@ -14,7 +14,7 @@ public class Search {
 	//Destination parameter
 	private String destination;
 	//Date calculated using dateString
-	private Date flightDate;
+	private Calendar flightDate;
 	//Date parameter
 	private String dateString;
 	//Number of adults
@@ -39,10 +39,10 @@ public class Search {
 	public void setDestination(String destination) {
 		this.destination = destination;
 	}
-	public Date getFlightDate() {
+	public Calendar getFlightDate() {
 		return flightDate;
 	}
-	public void setFlightDate(Date flightDate) {
+	public void setFlightDate(Calendar flightDate) {
 		this.flightDate = flightDate;
 	}
 	public int getAdults() {

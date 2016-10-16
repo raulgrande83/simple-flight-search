@@ -55,6 +55,6 @@ public class Airline {
 
 	public void setInfantPrice(Price infantPrice) {
 		this.infantPrice = infantPrice;
-	}
+	}	
 
 }

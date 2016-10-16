@@ -1,6 +1,8 @@
 com\lastminute\flightsearch\FlightSearchAllTests.class
+com\lastminute\flightsearch\beans\AirlineTest.class
 com\lastminute\flightsearch\FlightSearchTest.class
 com\lastminute\flightsearch\mocks\MockData.class
+com\lastminute\flightsearch\utils\FlightSearchUtilsTest.class
 com\lastminute\flightsearch\pricerules\PassengerPriceRulesTest.class
 com\lastminute\flightsearch\data\FlightsDataTest.class
 com\lastminute\flightsearch\beans\AirportTest.class

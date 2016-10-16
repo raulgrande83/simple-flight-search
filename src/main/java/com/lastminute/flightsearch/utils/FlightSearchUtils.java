@@ -4,8 +4,9 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,13 +31,18 @@ public class FlightSearchUtils {
 	 */
 	public static Airline getAirlineByIATA(String IATACode){
 		
-		//Find an airline over the airlines list 
-		Optional<Airline> result = FlightsData.getAirlinesList().stream()
-							    .filter(a -> Objects.equals(a.getIATACode(), IATACode))
-							    .findFirst();
-		
-		//Return the resulting airline
-		return result.get();
+		try{
+			//Find an airline over the airlines list 
+			Optional<Airline> result = FlightsData.getAirlinesList().stream()
+								    .filter(a -> Objects.equals(a.getIATACode(), IATACode))
+								    .findFirst();
+			
+			//Return the resulting airline
+			return result.get();
+		}catch (NoSuchElementException e) {
+			//The IATA Code is not present in the list
+			return null;
+		}
 	}
 	
 	/**
@@ -45,13 +51,18 @@ public class FlightSearchUtils {
 	 */
 	public static Airport getAirportByIATA(String IATACode){
 		
-		//Find an airport over the airports list
-		Optional<Airport> result = FlightsData.getAirportsList().stream()
-							    .filter(a -> Objects.equals(a.getIATACode(), IATACode))
-							    .findFirst();
-		
-		//Return the resulting airport
-		return result.get();
+		try{
+			//Find an airport over the airports list
+			Optional<Airport> result = FlightsData.getAirportsList().stream()
+								    .filter(a -> Objects.equals(a.getIATACode(), IATACode))
+								    .findFirst();
+			
+			//Return the resulting airport
+			return result.get();
+		}catch (NoSuchElementException e) {
+			//The IATA Code is not present in the list
+			return null;
+		}
 	}
 	
 	/**
@@ -94,13 +105,15 @@ public class FlightSearchUtils {
 	/**
 	 * Method that returns a Date from a String in format dd/MM/yyyy
 	 * @param dateSearch The string with the date
-	 * @return Date The Date object from the string
+	 * @return Calendar The date object from the string
 	 * @throws ParseException It is thrown if the format is not valid
 	 */
-	public static Date getFlightDate(String dateSearch) throws ParseException{
+	public static Calendar getFlightDate(String dateSearch) throws ParseException{
 		//Format the date
+		Calendar date = Calendar.getInstance();
 		SimpleDateFormat formatter = new SimpleDateFormat(Constants.DATE_FORMAT);
-        return formatter.parse(dateSearch);
+		date.setTime(formatter.parse(dateSearch));
+        return date;
 	}
 	
 	/**
@@ -108,10 +121,11 @@ public class FlightSearchUtils {
 	 * @param departureDate The Date of flight departure.
 	 * @return long The number of days between today and departure date
 	 */
-	public static long calculateDepartureDays(Date departureDate){
+	public static long calculateDepartureDays(Calendar departureDate){
 		//Get today date
 		LocalDate today = LocalDate.now();
-		LocalDate departure = new java.sql.Date(departureDate.getTime()).toLocalDate();
+		//Convert departure date
+		LocalDate departure = new java.sql.Date(departureDate.getTimeInMillis()).toLocalDate();
 
 		//Return number of days between today and departure date 
 		return ChronoUnit.DAYS.between(today, departure);
@@ -123,7 +137,7 @@ public class FlightSearchUtils {
 	 * @param departureDate The date of departure
 	 * @return DaysPriceRules The price rule that apply to that departure date
 	 */
-	public static DaysPriceRules getPriceRule(Date departureDate){
+	public static DaysPriceRules getPriceRule(Calendar departureDate){
 		//Get how many days are prior to departure date
 		final long daysPriorDeparture = calculateDepartureDays(departureDate);
 		

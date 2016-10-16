@@ -45,14 +45,22 @@ public class AirportTest {
 
 	@Test
 	public void testGetIATACodeDummy() {
-		assertEquals("The IATA Code should be "+IATA_CODE, IATA_CODE, airport.getIATACode());
-		assertNull("The IATA Code should be null", airportNull.getIATACode());
-		
+		assertEquals("The IATA Code should be "+IATA_CODE, IATA_CODE, airport.getIATACode());		
 	}
 
 	@Test
 	public void testGetCityDummy() {
 		assertEquals("The City name should be "+CITY, CITY, airport.getCity());
+	}
+	
+	@Test
+	public void testGetIATACodeNull(){
+		assertNull("The IATA Code should be null", airportNull.getIATACode());
+	}
+	
+	@Test
+	public void testGetCityNull() {
+		assertNull("The City name should be null", airportNull.getCity());
 	}
 
 }
